@@ -12,14 +12,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/stkay/GyaonExtension.git"
+    "url": "git+https://github.com/Hykwtakumin/Node-SFC-SFS-Scraper"
   },
   "author": "hykwtakumin <hykwtakumin@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/stkay/GyaonExtension/issues"
+    "url": "https://github.com/Hykwtakumin/Node-SFC-SFS-Scraper/issues"
   },
-  "homepage": "https://github.com/stkay/GyaonExtension#readme",
+  "homepage": "https://github.com/Hykwtakumin/Node-SFC-SFS-Scraper",
   "dependencies": {
     "@types/es6-promise": "^3.3.0",
     "axios": "^0.18.0",
