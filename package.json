@@ -1,0 +1,32 @@
+{
+  "name": "Node-SFC-SFS-Scraper",
+  "version": "1.0.0",
+  "description": "scraping scripts for SFC-SFS by Nodejs",
+  "main": "index.js",
+  "scripts": {
+    "clean": "rm -rf dist/*",
+    "tsc": "tsc",
+    "build": "npm run clean && npm run tsc && npm run browserify",
+    "browserify-bg": "browserify ./dist/index.js -o ./dist/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stkay/GyaonExtension.git"
+  },
+  "author": "hykwtakumin <hykwtakumin@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/stkay/GyaonExtension/issues"
+  },
+  "homepage": "https://github.com/stkay/GyaonExtension#readme",
+  "dependencies": {
+    "@types/es6-promise": "^3.3.0",
+    "axios": "^0.18.0",
+    "cheerio-httpcli": "^0.7.3"
+  },
+  "devDependencies": {
+    "browserify": "^16.2.2",
+    "typescript": "^2.9.2"
+  }
+}
