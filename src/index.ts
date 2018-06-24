@@ -2,7 +2,7 @@ import 'dotenv/config';
 import * as client from 'cheerio-httpcli';
 
 //SFC-SFSのアドレス
-const sfsAddr = 'https://vu.sfc.keio.ac.jp/sfc-sfs/';
+const sfsAddr = process.env.SFS_URL;
 //ログイン情報
 const signIn_Info = {
     u_login: process.env.SFS_USER,
