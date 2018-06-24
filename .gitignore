@@ -64,5 +64,7 @@ typings/
 /tmp/
 /bin/
 dist.zip
+!dist
 *.test
 *.swp
+.env

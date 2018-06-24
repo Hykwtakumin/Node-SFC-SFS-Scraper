@@ -6,8 +6,9 @@
   "scripts": {
     "clean": "rm -rf dist/*",
     "tsc": "tsc",
-    "build": "npm run clean && npm run tsc && npm run browserify",
-    "browserify-bg": "browserify ./dist/index.js -o ./dist/index.js",
+    "copy": "cp .env ./dist/.env",
+    "build": "npm run clean && npm run copy && npm run tsc",
+    "browserify": "browserify ./dist/index.js -o ./dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -21,9 +22,11 @@
   },
   "homepage": "https://github.com/Hykwtakumin/Node-SFC-SFS-Scraper",
   "dependencies": {
+    "@types/dotenv": "^4.0.3",
     "@types/es6-promise": "^3.3.0",
     "axios": "^0.18.0",
-    "cheerio-httpcli": "^0.7.3"
+    "cheerio-httpcli": "^0.7.3",
+    "dotenv": "^6.0.0"
   },
   "devDependencies": {
     "browserify": "^16.2.2",
