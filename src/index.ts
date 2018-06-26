@@ -25,27 +25,33 @@ async function signIn() {
 			const specificIdEnd = result.body.indexOf('&type=s&mode=0');
 			//無理矢理URLを切り出してる(もっと良い方法があるはず)
 			const specificId = result.body.slice(specificIdStart, specificIdEnd);
-			console.log(specificId);
-
 			const timeTableLink = `https://vu.sfc.keio.ac.jp/sfc-sfs/sfs_class/student/view_timetable.cgi?${specificId}&type=s&mode=1&lang=ja`;
-			console.log(timeTableLink);
-
+			//iframeの内容
 			const timeTable = await client.fetch(timeTableLink);
-			console.log(timeTable);
+			//時間割のtableから授業へのリンクを抽出する
+            const courseLinks = timeTable.$('table').find('a');
+            // console.log(courseLinks);
+            const courseLinkArray : Array<string> = [];
 
-			// //切り出しに成功したらログイン後のページを返す
-			// const signedInPage = await client.fetch(signInLink);
-			// // signedInPage.$("#navigation > div:nth-child(2) > a").val();
-			// //ログイン後の"MY時間割"ページにアクセスする
-			// const myTimeTable = await signedInPage.$("#navigation > div:nth-child(2) > a").click();
-			// //時間割のタイトルだけ取ってくる(h4要素でclassが"one"のモノ)
-			// const myTimeTableTitle = myTimeTable.$("h4.one").text();
-			// //コンソールに表示(MY時間割－20XXZ学期（確定))
-			// console.log(myTimeTableTitle);
+            courseLinks.each( async (index, element) => {
+                const link = element.attribs.href;
+                courseLinkArray.push(link);
+            });
 
-			// //時間割表を走査していく(表はどうもiframeらしい)
-			// //TODO iframeをどう取得するか考え中...
-			// const iframeURL = myTimeTable.$("frame_set");
+            console.log(courseLinkArray);
+
+            //授業ページに順次アクセスし、課題へのリンクを取得する
+            courseLinkArray.forEach( async (item) => {
+                //一応URLとしてエンコードしておく
+                const link = encodeURI(item);
+                //アクセスしてくる
+                const coursePage = await client.fetch(item);
+                //課題のリンクを取得する
+                coursePage.$('td').find('a').each(async (index, element) => {
+                    //個別の課題のリンク
+                    const assignment =  element.attribs.href;
+                })
+            });
 		})
 		.catch(error => {
 			//ログインに失敗した場合
