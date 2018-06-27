@@ -2,7 +2,7 @@ import 'dotenv/config';
 import * as client from 'cheerio-httpcli';
 
 //SFC-SFSのアドレス
-const sfsAddr = process.env.SFS_URL;
+const sfsAddr = process.env.SFS_URL || "https://vu.sfc.keio.ac.jp/sfc-sfs/";
 //ログイン情報
 const signIn_Info = {
 	u_login: process.env.SFS_USER,
@@ -32,13 +32,17 @@ async function signIn() {
             const courseLinks = timeTable.$('table').find('a');
             // console.log(courseLinks);
             const courseLinkArray : Array<string> = [];
+            const courseNameArray : Array<string> = [];
 
             courseLinks.each( async (index, element) => {
                 const link = element.attribs.href;
+                const name = element.firstChild.data;
                 courseLinkArray.push(link);
+                courseNameArray.push(name);
             });
 
             console.log(courseLinkArray);
+            console.log(courseNameArray);
 
             //授業ページに順次アクセスし、課題へのリンクを取得する
             courseLinkArray.forEach( async (item) => {
